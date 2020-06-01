@@ -1,0 +1,24 @@
+{
+    "trigger": true,
+    "modules": [
+        "verification-link"
+    ],
+    "parentResource": "eluvo8233cfee",
+    "functionName": "eluvo8233cfeeCustomMessage",
+    "resourceName": "eluvo8233cfeeCustomMessage",
+    "parentStack": "auth",
+    "triggerEnvs": [
+        {
+            "key": "RESOURCENAME",
+            "value": "resourceName"
+        }
+    ],
+    "triggerDir": "C:\\Users\\liann\\AppData\\Roaming\\npm\\node_modules\\@aws-amplify\\cli\\node_modules\\amplify-category-auth\\provider-utils\\awscloudformation\\utils/../triggers/CustomMessage",
+    "triggerTemplate": "CustomMessage.json.ejs",
+    "roleName": "eluvo8233cfeeCustomMessage",
+    "skipEdit": true,
+    "REDIRECTURL": "",
+    "EMAILSUBJECT": "Eluvo account verification",
+    "EMAILMESSAGE": "Please verify your email address for the Eluvo account",
+    "RESOURCENAME": "resourceName"
+}
