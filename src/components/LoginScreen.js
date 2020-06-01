@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 
 import { StyleSheet, Text, View, Image, Dimensions, TextInput, Button } from 'react-native';
+//import Authentication from './src/components/Authentication';
 const { width, height } = Dimensions.get('window');
-function LoginScreen({ navigation }) {
-
-
-
-  navigateToScreen = () => {
-
-    navigation.navigate('Forgot Password');
-
+import { Auth } from "aws-amplify";
+export default class LoginScreen extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+    username: "",
+    password: "",
   }
+}
+
+  handleSignIn = () => {
+    const { username, password } = this.state;
+    
+    Auth.signIn(username, password)
+      // If we are successful, navigate to Home screen
+      .then(user => this.props.navigation.navigate('Authentication'))
+      // On failure, display error in console
+      .catch(err => alert("Wrong username or password"));
+  }
+  
+   render() {
   return (
     <View style={styles.MainContainer}>
 
@@ -31,32 +44,49 @@ function LoginScreen({ navigation }) {
 
 
 
-      <View style={styles.inputContainer}>
+     
 
-        <Text style={styles.text}>Username</Text>
+        
+     
+
+      <View style={styles.inputContainer}>
+      <Text style={styles.text}>Username</Text>
         <TextInput
           style={styles.input}
           placeholder={'Username'}
+          onChangeText={
+    // Set this.state.email to the value in this Input box
+        (value) => this.setState({ username: value })
+  }
           placeholderTextColor='#ffff' />
-      </View>
-
-      <View style={styles.inputContainer}>
-
         <Text style={styles.text}>Password</Text>
         <TextInput
           style={styles.input}
           placeholder={'Password'}
+          onChangeText={
+    // Set this.state.email to the value in this Input box
+    (value) => this.setState({ password: value })
+  }
           secureTextEntry={true}
           placeholderTextColor='#ffff' />
 
-        <View style={styles.forgotBtnContainer}>
-
-          <Button
+<View  style = {styles.inputContainer}>
+      <Button style = {styles.forgotBtnContainer}
             color={'white'}
 
             onPress={this.navigateToScreen} title="Forgot Password?"
           />
-        </View>
+
+</View>
+
+        {/* <View style={styles.forgotBtnContainer}>
+
+          <Button style = {styles.forgotBtnContainer}
+            color={'white'}
+
+            onPress={this.navigateToScreen} title="Forgot Password?"
+          />
+        </View> */}
 
       </View>
 
@@ -65,7 +95,7 @@ function LoginScreen({ navigation }) {
 
 
           color={'#f09874'}
-          //onPress={this.navigateToScreen}
+          onPress={this.handleSignIn}
           title="Login"
 
         />
@@ -74,7 +104,7 @@ function LoginScreen({ navigation }) {
     </View >
   );
 }
-
+}
 const styles = StyleSheet.create({
   MainContainer: {
     flex: 1,
@@ -179,4 +209,3 @@ const styles = StyleSheet.create({
 
 });
 
-export default LoginScreen;
